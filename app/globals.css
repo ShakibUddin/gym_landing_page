@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #d4ff3a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-ink: #0e0e0c;
+  --color-paper: #f2f0ea;
+  --color-line: #2c2c28;
+  --color-panel: #161614;
+  --color-muted: #a8a69e;
+  --color-soft: #cfcdc5;
+  --font-display: var(--font-anton), Impact, sans-serif;
+  --font-sans: var(--font-barlow), "Helvetica Neue", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+@layer base {
+  a {
+    color: var(--color-paper);
+  }
+  a:hover {
+    color: #fff;
+  }
+}
+
+/* Hatched photo placeholder used behind next/image */
+.ph-hero {
+  background-color: #1a1a17;
+  background-image: repeating-linear-gradient(135deg, #20201c 0, #20201c 2px, transparent 2px, transparent 14px);
+}
+.ph-panel {
+  background-color: #1e1e1b;
+  background-image: repeating-linear-gradient(135deg, #252521 0, #252521 2px, transparent 2px, transparent 14px);
+}
+
+/* Accessibility & cross-browser polish */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Keep the focus ring visible on accent-colored and light surfaces */
+#membership :focus-visible {
+  outline-color: var(--color-ink);
+}
+
+section[id] {
+  scroll-margin-top: 16px;
+}
+
+input,
+select,
+button {
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23F2F0EA' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
 }
